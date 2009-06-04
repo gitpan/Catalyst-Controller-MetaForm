@@ -1,0 +1,29 @@
+---
+abstract: 'MetaForm sugar for Catalyst'
+author:
+  - 'Anders Nor Berle <berle@cpan.org>'
+build_requires:
+  ExtUtils::MakeMaker: 6.42
+  Test::More: 0.42
+configure_requires:
+  ExtUtils::MakeMaker: 6.42
+distribution_type: module
+generated_by: 'Module::Install version 0.87'
+license: perl
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: 1.4
+name: Catalyst-Controller-MetaForm
+no_index:
+  directory:
+    - inc
+    - t
+requires:
+  Catalyst::Runtime: 5.71001
+  Class::MetaForm: 0
+  Moose: 0.79
+  aliased: 0
+  namespace::autoclean: 0
+resources:
+  license: http://dev.perl.org/licenses/
+version: 0.01_01
