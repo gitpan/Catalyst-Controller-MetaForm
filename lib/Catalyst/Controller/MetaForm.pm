@@ -8,7 +8,7 @@ use Class::MOP;
 use strict;
 use warnings;
 
-our $VERSION = '0.01_01';
+our $VERSION = '0.01_02';
 
 sub create_action {
   my ($self,%args) = @_;
@@ -59,6 +59,7 @@ Catalyst::Controller::MetaForm - MetaForm sugar for Catalyst
   package MyApp::Form::Login;
 
   use Moose;
+
   use Class::MetaForm;
 
   has username => (
@@ -84,19 +85,33 @@ Catalyst::Controller::MetaForm - MetaForm sugar for Catalyst
   # validated before the code gets to execute.
 
   sub login : Local AssertForm('Login') Args(0) {
-    my ($self,$c,$form) = @_;
+    my ($self,$c) = @_;
+
+    # We will always have $c->stash->{ form } here.
   }
 
   # In this case, the form MyApp::Form::Something doesn't have to be
   # valid in order for the action to execute.
 
-  sub somethingelse : Local Form('Something') Args(0) {
-    my ($self,$c,$form) = @_;
+  sub somethingelse : Local Form('Login') Args(0) {
+    my ($self,$c) = @_;
 
-    # $form will be undefined if it wasn't successfully validated
+    # $c->stash->{ form } will be undefined if it wasn't successfully
+    # validated. The error can be found in $c->stash->{ form_error }
   }
 
   1;
+
+=head1 DESCRIPTION
+
+See L<Class::MetaForm> for an actual description.
+
+=head1 MORE SUGARING?
+
+Add the following snippet to your MyApp.pm for quick access to your
+stashed form.
+
+  sub form { shift->stash->{ form } }
 
 =head1 SEE ALSO
 

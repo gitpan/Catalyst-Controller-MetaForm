@@ -40,7 +40,7 @@ around execute => sub {
       die $e;
     }
   } else {
-    unshift @args,$form;
+    $c->stash->{ form } = $form;
   }
 
   return $self->$next ($controller,$c,@args);

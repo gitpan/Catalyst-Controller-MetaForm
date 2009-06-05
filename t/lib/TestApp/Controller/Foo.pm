@@ -5,9 +5,9 @@ use Moose;
 BEGIN { extends qw/Catalyst::Controller::MetaForm/ };
 
 sub submit_form : Local Form('Foo') Args(0) {
-  my ($self,$c,$form) = @_;
+  my ($self,$c) = @_;
 
-  if (defined $form) {
+  if (defined $c->stash->{ form }) {
     $c->res->body ('GOT_FORM');
   } else {
     $c->res->body ('NO_FORM');
@@ -17,9 +17,13 @@ sub submit_form : Local Form('Foo') Args(0) {
 }
 
 sub asserted_submit_form : Local AssertForm('Foo') Args(0) {
-  my ($self,$c,$form) = @_;
+  my ($self,$c) = @_;
 
-  $c->res->body ('GOT_FORM');
+  if (defined $c->stash->{ form }) {
+    $c->res->body ('GOT_FORM');
+  } else {
+    $c->res->body ('NO_FORM');
+  }
 
   return;
 }
