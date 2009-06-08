@@ -8,7 +8,7 @@ use Class::MOP;
 use strict;
 use warnings;
 
-our $VERSION = '0.01_02';
+our $VERSION = '0.01_03';
 
 sub create_action {
   my ($self,%args) = @_;

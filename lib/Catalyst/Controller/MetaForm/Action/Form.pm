@@ -31,7 +31,7 @@ around execute => sub {
 
   if (my $e = $@) {
     if (blessed $e && $e->isa ('Class::MetaForm::Exception')) {
-      $c->stash->{ form_error } = $e->message;
+      $c->stash->{ form_error } = $e->simple_message;
 
       $c->log->debug ("$e") if $c->debug;
 
